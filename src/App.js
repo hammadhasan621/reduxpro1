@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import {connect} from 'react-redux';
+import Setcomp from './component/Setcomp';
+import Showcomp from './component/Showcomp';
+import { fetchalldata } from './store/action';
 
-function App() {
+
+function App(props) {
+  useEffect(()=>{
+    props.fetchalldata()
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Setcomp />
+      <Showcomp />
     </div>
   );
 }
 
-export default App;
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchalldata : () => dispatch(fetchalldata())
+})
+
+export default connect(null,mapDispatchToProps)(App);
+
